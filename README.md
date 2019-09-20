@@ -1,5 +1,8 @@
 # Edge-CPU-8-bit-V2.0-For-FPGAs
 CPU edge is light weight general purpose Soft core processor for FPGAs with powerful 49 instructions can be clocked up to 70 MHz*. 
+
+This CPU was design only with goal of optimizing Clock cycles for each instructions to get realtime perfomance and High Throughput by utilizing Rising and falling edge of clock. IDCU is the most complex part of the edge CPU which controls all components of CPU by extracting Control set/timing information from single 8 bit instruction. and luckly almost all instructions in the edge CPU takes ~1-2 cycles where the Program counter pre-incremented on timing where the instruction can be loaded with no Stalls. stall is conditions where number of clocks CPU wasted in doing nothing. Stall do not occurs even in a Conditional Jump in this CPU.
+
 this is very early stage version with extermly limited functionalities. (limitations and Future Plans of development is mentioned in Last)
 # Features:
 2 bidirectional IO ports 
