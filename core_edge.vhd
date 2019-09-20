@@ -106,7 +106,7 @@ COMPONENT mux
 	
 	COMPONENT Program_mem
 	PORT(
-		address : IN std_logic_vector(3 downto 0);          
+		address : IN std_logic_vector(4 downto 0);          
 		data_out : OUT std_logic_vector(7 downto 0)
 		);
 	END COMPONENT;
@@ -199,7 +199,7 @@ UART_COM: uart PORT MAP(
 clock_scaler: clock_divider PORT MAP(clk => clk_in,clk_out => clk, display_clk => dclk, UART_CLK => UART_CLK);
 	
 --clk <= clk_in;
-program_memory : program_mem port map (address => pcnt(3 downto 0), data_out  => isin);
+program_memory : program_mem port map (address => pcnt(4 downto 0), data_out  => isin);
 
 	instruction_decode_and_control_unit: IDCU PORT MAP(
 	status => status,
