@@ -32,10 +32,10 @@ this is how IDCU extracts Control Sets for different blocks of CPU from instruct
 ICDU has the internal Address and Data Bus of 8Bit width with enable and write read capable to interface extra peripheral IO device which can address devices. and Data bus used to  write Data, internal address, control word of that device.
 
 # Limitations:
-1.No intruppts
-2.The CPU can be Clocked only Upto 70MHz because of the many operations are tied on both rising and falling edge to do more operations on both clock cycles and that requires proper clock pulse width to avoid problems.
-3.No Direct RAM access. data must be written into Accumulator or Register A then the read and write operation can happen with memory.
-4.extremly less General purpose registers. only Accumulator, Register A, Register B available in which Register A can be only read when its added in Accumulator with 0. and register B is Comparison Register that compares the content with Reg A or Acc to Do Conditional Jump. RAM has to be used in such cases where data is more.
+ 1. No intruppts
+ 2. The CPU can be Clocked only Upto 70MHz because of the many operations are tied on both rising and falling edge to do more operations on both clock cycles and that requires proper clock pulse width to avoid problems.
+ 3. No Direct RAM access. data must be written into Accumulator or Register A then the read and write operation can happen with memory.
+ 4. extremly less General purpose registers. only Accumulator, Register A, Register B available in which Register A can be only read when its added in Accumulator with 0. and register B is Comparison Register that compares the content with Reg A or Acc to Do Conditional Jump. RAM has to be used in such cases where data is more.
 
 # Future Development
 since this little development gave lots of idea and confidence on designing CPU the Following major changes will come in the Project Edge CPU.
