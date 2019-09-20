@@ -1,5 +1,6 @@
 # Edge-CPU-8-bit-V2.0-For-FPGAs
 CPU edge is light weight general purpose Soft core processor for FPGAs with powerful 49 instructions can be clocked up to 70 MHz*. 
+this is very early stage version with extermly limited functionalities. (limitations and Future Plans of development is mentioned in Last)
 # Features:
 2 bidirectional IO ports 
 Extensible peripherals upto 256 by using the internal CPU bus.
@@ -26,3 +27,17 @@ for example if Move_prg_mem_acc,"Value_X" instruction is fetched to move data Va
 this is how IDCU extracts Control Sets for different blocks of CPU from instruction fetched which is extremly timing optimized such that it can do more on each clock cycle.
 
 ICDU has the internal Address and Data Bus of 8Bit width with enable and write read capable to interface extra peripheral IO device which can address devices. and Data bus used to  write Data, internal address, control word of that device.
+
+# Limitations:
+The CPU can be Clocked only Upto 70MHz because of the many operations are tied on both rising and falling edge to do more operations on both clock cycles and that requires proper clock pulse width to avoid problems.
+No Direct RAM access. data must be written into Accumulator or Register A then the read and write operation can happen with memory.
+extremly less General purpose registers. only Accumulator, Register A, Register B available in which Register A can be only read when its added in Accumulator with 0. and register B is Comparison Register that compares the content with Reg A or Acc to Do Conditional Jump. RAM has to be used in such cases where data is more.
+
+# Future Development
+since this little development gave lots of idea and confidence on designing CPU the Following major changes will come in the Project Edge CPU.
+ 1. Moving CPU 8 bit to 32 bit.
+ 2. Redesingning the PFDE(pipelined fetch decode execute engine)  for obtaining Higher Clock rate
+ 3. 32x32 Register Array directly multiplexed with ALU for super fast data access.
+ 4. programmable Clock manager to vary clock rate for specific programs.
+ 6. Adding programmable 8 DSP tiles for parallelized digital signal processing applications
+ 5. Writing The Compiler For Edge cores.
