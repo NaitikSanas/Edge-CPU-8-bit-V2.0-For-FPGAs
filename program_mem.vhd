@@ -6,13 +6,13 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity Program_mem is
 port (
-address: in std_logic_vector(3 downto 0);
+address: in std_logic_vector(4 downto 0);
 data_out : out std_logic_vector(7 downto 0)
 );
 end Program_mem;
 
 architecture Behavioral of Program_mem is
-type program  is array(0 to 15) of std_logic_vector(7 downto 0);
+type program  is array(0 to 31) of std_logic_vector(7 downto 0);
 constant nop : std_logic_vector(7 downto 0):= "00000000";
 --------------------moving    data  ----------------
 constant move_PRG_mem_acc : std_logic_vector(7 downto 0):= "00011101";
@@ -55,17 +55,35 @@ constant TX_Data : std_logic_vector(7 downto 0):= "00110000";
 constant RX_Data : std_logic_vector(7 downto 0):= "00110001"; 
 
 constant instruction_set : program := (
---transmit data
-move_prg_mem_acc, "01100001",
-block_alu,
-TX_data,
---recieve data loop
-RX_data,
-move_acc_IOP_b,
-block_iop,
-goto, "00000100",
-------------empty sector----------
+------setup------ 
+move_prg_mem_regB, "11111111", --set refrence
 
+----count OFF time-------
+inc_acc,
+block_alu,
+cmp_accEQb, "00001000", --goto set port if Acc = B
+goto, "00000010", --inc ACC
+
+------------set port-- ---------
+move_prg_mem_acc, "11111111",--set port b to  255
+move_acc_iop_b,
+block_iop,
+
+----------count ON time--------
+alu_inc_regA, 
+block_ALU,
+for_i, "00010010", ---goto reset port if A = B
+goto, "00001100",---inc A
+
+----------reset port----------
+move_prg_mem_acc, "00000000",
+move_acc_iop_b,
+block_iop,
+goto, "00000010",--  goto count OFF time
+
+
+------------empty sector----------
+nop,
 nop,
 nop,
 nop,
@@ -73,6 +91,7 @@ nop,
 nop,
 nop,
 nop
+
 );
 
 begin
